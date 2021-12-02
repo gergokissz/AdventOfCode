@@ -1,5 +1,7 @@
 ﻿open System.IO
 
+exception CommandError of string
+
 let input =
     File.ReadAllLines(@"input.txt")
     |> Seq.map (fun line -> line.Split(' '))
@@ -12,6 +14,7 @@ let aggregatePosition (position: Position) (command: string, x: int) =
     | "forward" -> { position with Horizontal = position.Horizontal + x }
     | "up" -> { position with Depth = position.Depth - x }
     | "down" -> { position with Depth = position.Depth + x }
+    | _ -> raise (CommandError("Invalid command: " + command))
 
 let position = input |> Seq.fold aggregatePosition { Horizontal = 0; Depth = 0 }
 
@@ -24,6 +27,7 @@ let aggregatePositionWithAim (position: PositionWithAim) (command: string, x: in
     | "forward" -> { position with Horizontal = position.Horizontal + x; Depth = position.Depth + x * position.Aim }
     | "up" -> { position with Aim = position.Aim - x }
     | "down" -> { position with Aim = position.Aim + x}
+    | _ -> raise (CommandError("Invalid command: " + command))
 
 let positionWithAim = input |> Seq.fold aggregatePositionWithAim { Horizontal = 0; Depth = 0; Aim = 0 }
 
