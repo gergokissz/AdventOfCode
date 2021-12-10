@@ -67,7 +67,7 @@ let corruptedLinesTotalScore =
         | _ -> 0UL)
     |> Seq.sum
 
-let incompleteLinesTotalScored =
+let incompleteLinesTotalScore =
     Day10.readLinesFromFile "input.txt"
     |> Seq.map (fun characters -> characters |> Day10.evaluate [])
     |> Seq.map (fun result ->
@@ -80,4 +80,4 @@ let incompleteLinesTotalScored =
     |> fun scores -> scores[scores.Length / 2]
 
 printfn "%i" corruptedLinesTotalScore   // 299793
-printfn "%i" incompleteLinesTotalScored // 3654963618
+printfn "%i" incompleteLinesTotalScore // 3654963618
