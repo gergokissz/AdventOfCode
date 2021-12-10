@@ -60,7 +60,7 @@ module Day10 =
 
 let corruptedLinesTotalScore =
     Day10.readLinesFromFile "input.txt"
-    |> Seq.map (fun line -> line |> Day10.evaluate [])
+    |> Seq.map (fun characters -> characters |> Day10.evaluate [])
     |> Seq.map (fun result ->
         match result with
         | Day10.Corrupted score -> score
@@ -69,7 +69,7 @@ let corruptedLinesTotalScore =
 
 let incompleteLinesTotalScored =
     Day10.readLinesFromFile "input.txt"
-    |> Seq.map (fun line -> line |> Day10.evaluate [])
+    |> Seq.map (fun characters -> characters |> Day10.evaluate [])
     |> Seq.map (fun result ->
         match result with
         | Day10.Incomplete score -> score
@@ -77,7 +77,7 @@ let incompleteLinesTotalScored =
     |> Seq.filter (fun score -> score > 0UL)
     |> Seq.sort
     |> Seq.toList
-    |> fun list -> list[list.Length / 2]
+    |> fun scores -> scores[scores.Length / 2]
 
 printfn "%i" corruptedLinesTotalScore   // 299793
 printfn "%i" incompleteLinesTotalScored // 3654963618
