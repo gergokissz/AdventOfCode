@@ -1,27 +1,25 @@
 ﻿const string input = "Input.txt";
 
-int Part1()
-{
-    return File.ReadAllLines(input).Sum(x =>
-        Range.ParseTwo(x.AsSpan()) switch
-        {
-            (Range, Range) r when r.Item1.Contains(r.Item2) => 1,
-            (Range, Range) r when r.Item2.Contains(r.Item1) => 1,
-            _ => 0,
-        }
-    );
-}
+int Part1() => 
+    File.ReadAllLines(input)
+        .Sum(x =>
+            Range.ParseTwo(x.AsSpan()) switch
+            {
+                (Range, Range) r when r.Item1.Contains(r.Item2) => 1,
+                (Range, Range) r when r.Item2.Contains(r.Item1) => 1,
+                _ => 0,
+            }
+        );
 
-int Part2()
-{
-    return File.ReadAllLines(input).Sum(x =>
-        Range.ParseTwo(x.AsSpan()) switch
-        {
-            (Range, Range) r when r.Item1.Overlaps(r.Item2) => 1,
-            _ => 0,
-        }
-    );
-}
+int Part2() =>
+    File.ReadAllLines(input)
+        .Sum(x =>
+            Range.ParseTwo(x.AsSpan()) switch
+            {
+                (Range, Range) r when r.Item1.Overlaps(r.Item2) => 1,
+                _ => 0,
+            }
+        );
 
 Console.WriteLine(Part1()); // 513
 Console.WriteLine(Part2()); // 878
